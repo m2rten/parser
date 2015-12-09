@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import unicodedata, time
+import unicodedata, time, re
 
 url="http://www.postimees.ee"
 ##url= input ('ENTER - ')	
@@ -17,18 +17,27 @@ tm= time.strftime("%H:%M:%S")
 dt=time.strftime("%d/%d/%Y")
 
 def removeComments (sentence):
-	return sentence
+	p = re.compile("(.*[^0-9])(\(\d+\)|\d+)$")
+	m = p.match(sentence)
+	if m:
+		print (sentence)
+		print ('Match found: ', m.group(1))
+		return m.group(1)
+	else:
+		return sentence
 
 with open('test.csv', 'a') as f:
 		
 	for tag in tags:
 		i+=1
+		heading = ""
 		try:
 			for string in tag.strings:
 				##print (bytes(string, 'utf-8').decode("utf-8"))
-				string = removeComments(string)
-				f.write(string.strip() )
-			f.write(";"+str(i)+";"+ str(dt)+";"+ tm+";"+"\n")
+				##print (string)				
+				heading+=string.strip() 
+			heading = removeComments(heading)
+			f.write(heading + ";"+str(i)+";"+ str(dt)+";"+ tm+";"+"\n")
 		except UnicodeEncodeError:
 			p+=1			
 			print ("jama")
