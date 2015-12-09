@@ -19,7 +19,7 @@ dt=time.strftime("%d/%d/%Y")
 def removeComments (sentence):
 	return sentence
 
-with open('testtest.csv', 'a') as f:
+with open('test.csv', 'a') as f:
 		
 	for tag in tags:
 		i+=1
