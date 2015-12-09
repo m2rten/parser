@@ -20,8 +20,6 @@ def removeComments (sentence):
 	p = re.compile("(.*[^0-9])(\(\d+\)|\d+)$")
 	m = p.match(sentence)
 	if m:
-		print (sentence)
-		print ('Match found: ', m.group(1))
 		return m.group(1)
 	else:
 		return sentence
