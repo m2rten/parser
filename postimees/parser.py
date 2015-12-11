@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import unicodedata, time, re
+import unicodedata, time, re, sys
+import configparser
 
 url="http://www.postimees.ee"
 ##url= input ('ENTER - ')	
@@ -15,6 +16,15 @@ i=0
 p=0
 tm= time.strftime("%H:%M:%S")
 dt=time.strftime("%d/%d/%Y")
+
+
+config = configparser.ConfigParser()
+print (config)
+config.read("conf.ini")
+
+print(config["Logging"]["errorfile"])
+
+sys.exit()
 
 def removeComments (sentence):
 	p = re.compile("(.*[^0-9])(\(\d+\)|\d+)$")
