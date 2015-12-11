@@ -1,30 +1,24 @@
 # -*- coding: utf-8 -*-
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import unicodedata, time, re, sys
-import configparser
+import unicodedata, time, re
+from conf import conf
+import sys
 
-url="http://www.postimees.ee"
-##url= input ('ENTER - ')	
+cf = conf()
+
+url=cf.url
 
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "html.parser")
 
 tags = soup('h1')
-#headings = soup.findall("h1", { "class" : "frontHeading" }) 
+
 i=0
 p=0
 tm= time.strftime("%H:%M:%S")
 dt=time.strftime("%d/%d/%Y")
 
-
-config = configparser.ConfigParser()
-print (config)
-config.read("conf.ini")
-
-print(config["Logging"]["errorfile"])
-
-sys.exit()
 
 def removeComments (sentence):
 	p = re.compile("(.*[^0-9])(\(\d+\)|\d+)$")
