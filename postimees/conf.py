@@ -1,6 +1,7 @@
 import sys, configparser
+from singleton import Singleton
 
-class conf:
+class conf(metaclass=Singleton):
 	
 	def __init__(self, confFile="conf.ini"):
 		global config 
@@ -13,4 +14,7 @@ class conf:
 		
 	def getConfObject(self, section, item):
 		return config[section][item]
+
+cf = conf()
+print (cf.url)
 
