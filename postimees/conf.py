@@ -4,7 +4,7 @@ from singleton import Singleton
 class conf(metaclass=Singleton):
 	
 	def __init__(self, confFile="conf.ini"):
-		global config 
+		global config
 		config = configparser.ConfigParser()
 		config.read(confFile)
 		self.setValues()
@@ -14,7 +14,4 @@ class conf(metaclass=Singleton):
 		
 	def getConfObject(self, section, item):
 		return config[section][item]
-
-cf = conf()
-print (cf.url)
 
