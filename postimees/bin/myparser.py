@@ -13,14 +13,16 @@ class postimeesParser:
 		if m:return m.group(1)
 		else:return sentence
 			
-	def parse(self, html, dt=None, tm=None):
+	def parse(self, html, cf=None, dt=None, tm=None):
 		soup = BeautifulSoup(html, "html.parser")
 		counter={"total":0, "errors":0}
+		output=cf.getConfObject("General","results_folder") +"/" + cf.getConfObject("General","output_file")
+		
 		if not dt: dt=time.strftime("%d/%d/%Y")
 		if not tm: tm= time.strftime("%H:%M:%S")
 		
 		tags = soup('h1')
-		with open('test.csv', 'a', encoding="utf-8", newline="") as csvfile:	
+		with open(output, 'a', encoding="utf-8", newline="") as csvfile:	
 			writer = csv.writer(csvfile, delimiter=';')
 			for tag in tags:
 				counter["total"]+=1
@@ -30,16 +32,14 @@ class postimeesParser:
 				except UnicodeEncodeError:
 					counter["errors"]+=1			
 					print ("jama")
-		return counter
-
-		
+		return counter		
 
 if __name__ == '__main__':
 	cf = conf()
 	url=cf.url
 	html = urlopen(url).read()
 	pmparser = postimeesParser()
-	counter = pmparser.parse(html)
+	counter = pmparser.parse(html, cf=cf)
 					
 	print (str(counter["total"]) + " korda")	
 	print (str(counter["errors"]) + " probleemi")
