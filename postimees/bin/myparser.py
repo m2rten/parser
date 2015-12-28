@@ -18,7 +18,7 @@ class postimeesParser:
 		counter={"total":0, "errors":0}
 		output=cf.getConfObject("General","results_folder") +"/" + cf.getConfObject("General","output_file")
 		
-		if not dt: dt=time.strftime("%d/%d/%Y")
+		if not dt: dt=time.strftime("%d/%m/%Y")
 		if not tm: tm= time.strftime("%H:%M:%S")
 		
 		tags = soup('h1')
