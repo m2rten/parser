@@ -11,6 +11,10 @@ class conf(metaclass=Singleton):
 		
 	def setValues(self):
 		self.url = config["General"]["url"]
+		self.host = config["Database"]["host"]
+		self.dbname = config["Database"]["dbname"]
+		self.user = config["Database"]["user"]
+		self.password = config["Database"]["password"]
 		
 	def getConfObject(self, section, item):
 		return config[section][item]
