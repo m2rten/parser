@@ -5,7 +5,7 @@ class TestStringMethods(unittest.TestCase):
 
 	def test_reading(self):
 		cf = conf()
-		self.assertEqual(cf.getConfObject("Logging","errorfile"), 'error.log')
+		self.assertEqual(cf.getConfObject("Logging","errorlog"), '../logs/error.log2')
 
 	def test_autosetting(self):
 		cf = conf()
